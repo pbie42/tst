@@ -11,5 +11,9 @@
   },
   "keywords": [],
   "author": "Paul Bie <pbie42@gmail.com> (http://synergized.io/)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "chai": "4.1.1",
+    "mocha": "3.5.0"
+  }
 }
