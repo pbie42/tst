@@ -13,38 +13,6 @@ class TST {
     this.properties = properties
   }
 
-  // xinsert(obj) {
-  //   // check that the object has the correct key
-  //   if (!obj.hasOwnProperty(this.properties.key)) { throw new Error('The object you are trying to insert does not contain the proper key') }
-
-  //   this.root = insertNode(this.root, obj[this.properties.key], obj, 0)
-
-  //   function insertNode(current, key, value, depth) {
-  //     if (current === undefined) {
-  //       if (key.length - 1 === depth) {
-  //         return new Node(key, value, depth)
-  //       }
-  //       current = new Node(key, undefined, depth)
-  //     }
-  //     let c = key[depth]
-  //     if (c < current.char) {
-  //       current.left = insertNode(current.left, key, value, depth)
-  //       return current
-  //     }
-  //     if (c > current.char) {
-  //       current.right = insertNode(current.right, key, value, depth)
-  //       return current
-  //     }
-  //     if (depth < key.length - 1) {
-  //       current.middle = insertNode(current.middle, key, value, depth + 1)
-  //       return current
-  //     }
-  //     current.value = value
-  //     return current
-  //   }
-
-  // }
-
   insert(obj) {
     if (!obj.hasOwnProperty(this.properties.key)) { throw new Error('The object you are trying to insert does not contain the proper key') }
 
@@ -211,15 +179,6 @@ class TST {
   }
 
 }
-
-// function xgetNode(current, key, depth) {
-//   if (current === undefined) return
-//   const c = key[depth]
-//   if (c < current.char) return getNode(current.left, key, depth)
-//   if (c > current.char) return getNode(current.right, key, depth)
-//   if (depth < key.length - 1) return getNode(current.middle, key, depth + 1)
-//   return current
-// }
 
 function getNode(current, key, depth) {
   if (current === undefined) return
