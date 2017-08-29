@@ -1,0 +1,15 @@
+{
+  "name": "tst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "keywords": [],
+  "author": "Paul Bie <pbie42@gmail.com> (http://synergized.io/)",
+  "license": "MIT"
+}
