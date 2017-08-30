@@ -2,6 +2,7 @@ const { expect } = require('chai')
 
 const Node = require(process.cwd() + '/src/node')
 const TST = require(process.cwd() + '/src/tst')
+const Pattern = require(process.cwd() + '/src/pattern')
 
 describe("TST", function() {
 
@@ -18,7 +19,7 @@ describe("TST", function() {
     let tst
 
     before(() => {
-      tst = new TST({ key: "url" })
+      tst = new Pattern({ key: "url" })
     })
 
     describe("inserting without pattern", function() {
