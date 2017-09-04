@@ -67,119 +67,77 @@ class TST {
     findRelated(startNode, result, prefix, this.properties.key)
     return result
 
-    function xfindRelated(current, stash, prefix, key) {
-      if (stash.length >= 20) return
-      if (current === undefined) return
-      if (current.value && current.value[key].includes(prefix)) stash.push(current.value)
-      findRelated(current.left, stash, prefix, key)
-      findRelated(current.middle, stash, prefix, key)
-      findRelated(current.right, stash, prefix, key)
-    }
-
     function findRelated(current, stash, prefix, key) {
       const prevs = []
       let goBack = false
       let start = true
-      let finding = true
       let previous = current.char
+
+      function backUp() {
+        previous = current.char
+        current = prevs[prevs.length - 1]
+        prevs.splice(-1, 1)
+      }
 
       if (current === undefined) return
 
-      while (finding) {
-        console.log(``, current)
-        console.log(`previous.char: `, previous)
-        console.log(`goBack`, goBack)
+      while (true) {
         if (current === undefined) return
         if (stash.length >= 20) break
         if (current.value && current.value[key].includes(prefix) && !stash.includes(current.value))
           stash.push(current.value)
         if (current.left && !goBack && !start) {
-
-          console.log(`1`)
-
           prevs.push(current)
           current = current.left
           continue
         }
         if (current.middle && !goBack) {
           start = false
-
-          console.log(`2`)
-
           prevs.push(current)
           current = current.middle
           continue
         }
         if (current.middle && goBack && current.middle.char != previous && !current.right) {
-
-          console.log(`3`)
-
           goBack = false
           prevs.push(current)
           current = current.middle
           continue
         }
         if (current.middle && goBack && current.middle.char != previous && current.right) {
-
-          console.log(`4`)
-
-          previous = current.char
-          current = prevs[prevs.length - 1]
-          prevs.splice(-1, 1)
+          backUp()
           continue
         }
         if (current.middle && goBack && current.middle.char == previous && !current.right) {
-
-          console.log(`5`)
-
-          previous = current.char
-          current = prevs[prevs.length - 1]
-          prevs.splice(-1, 1)
+          backUp()
           continue
         }
         if (current.right && !start && goBack && !current.left && !current.middle) {
-          previous = current.char
-          current = prevs[prevs.length - 1]
-          prevs.splice(-1, 1)
+          backUp()
           continue
         }
-        // if (current.right && !start && goBack && current.right.char ==) {
-        //   previous = current.char
-        //   current = prevs[prevs.length - 1]
-        //   prevs.splice(-1, 1)
-        //   continue
-        // }
+        if (current.right && !start && goBack && current.right.char == previous) {
+          backUp()
+          continue
+        }
         if (current.right && !start) {
-
-          console.log(`6`)
-
           goBack = false
           prevs.push(current)
           current = current.right
           continue
         }
         if (goBack && current.left && current.left.char === previous && !current.right && !current.middle) {
-
-          console.log(`7`)
-
-          previous = current.char
-          current = prevs[prevs.length - 1]
-          prevs.splice(-1, 1)
+          backUp()
           continue
         }
         if (!current.left && !current.right && !current.middle) {
           if (start) break
-          console.log(`getting here!!!!!!!!!!!!!`)
           goBack = true
-          previous = current.char
-          current = prevs[prevs.length - 1]
-          prevs.splice(-1, 1)
+          backUp()
           continue
         }
         break
       }
     }
-
   }
 
 }
